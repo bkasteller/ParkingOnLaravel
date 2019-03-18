@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
- @if ($user->rank)
+ @if (!$user->rank)
     <button type="button" class="btn btn-outline-success" onclick="event.preventDefault(); document.getElementById('request').submit();">
         Place request
     </button>

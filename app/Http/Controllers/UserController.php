@@ -29,8 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $placeblock = Booking::where('user_id', $user->id)->first();    
+        $user = Auth::user();   
         
         return view('home', compact('user'));
 
