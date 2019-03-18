@@ -30,9 +30,9 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $placeblock = Booking::where('user_id', $user->id)->first();
-       
-        return view('home', compact('user','placeblock'));
+        $placeblock = Booking::where('user_id', $user->id)->first();    
+        
+        return view('home', compact('user'));
 
     }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
 
         $get_back = request()->all();
 
-        return view('searchUser', compact('users', 'get_back','placeblock'));
+        return view('searchUser', compact('users', 'get_back'));
     }
 
     /**
