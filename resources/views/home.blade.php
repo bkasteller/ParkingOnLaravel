@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+ @if ( $placeblock!= NULL )
     <button type="button" class="btn btn-outline-success" onclick="event.preventDefault(); document.getElementById('request').submit();">
         Place request
     </button>
@@ -19,4 +20,6 @@
         <input type="hidden" name="user" value="{{ $user->id }}">
     </form>
 
+
+@endif
 @endsection

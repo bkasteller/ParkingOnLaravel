@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Parking\User;
 use Auth;
 use Illuminate\Validation\Rule;
+use Parking\Booking;
 
 class UserController extends Controller
 {
@@ -29,8 +30,10 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $placeblock = Booking::where('user_id', $user->id)->first();
+       
+        return view('home', compact('user','placeblock'));
 
-        return view('home', compact('user'));
     }
 
     /**
@@ -58,9 +61,11 @@ class UserController extends Controller
                })
                ->get();
 
+  
+
         $get_back = request()->all();
 
-        return view('searchUser', compact('users', 'get_back'));
+        return view('searchUser', compact('users', 'get_back','placeblock'));
     }
 
     /**
