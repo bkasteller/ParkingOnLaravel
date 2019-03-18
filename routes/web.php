@@ -143,6 +143,6 @@ Route::group([
     /*
      * Supprime un utilisateur de la file d'attente en appellant leaveRank().
      */
-    Route::get('/waitingList/{$user}/delete', 'WaitingListController@destroy')
+    Route::get('/waitingList/{user}/delete', 'WaitingListController@destroy')
         ->name('waitingList.delete');
 });

@@ -20,7 +20,7 @@
                         <td>{{ $user->lastName.' '.$user->firstName }}</td>
                         <td>Edit</td>
                         <td>
-                            <a href="{{ route('waitingList.delete', $user->id)}}" style="width:0">
+                            <a href="{{ route('waitingList.delete', $user) }}" style="width:0">
                                 <button type="button" class="btn btn-outline-danger">
                                     Delete
                                 </button>
