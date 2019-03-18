@@ -3,6 +3,7 @@
 namespace Parking\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Parking\User;
 
 class WaitingListController extends Controller
 {
@@ -13,7 +14,8 @@ class WaitingListController extends Controller
      */
     public function edit()
     {
-        //
+        $users = User::whereNotNull('rank')->get();
+        return view('editWaitingList', compact('users'));
     }
 
     /**
@@ -25,7 +27,7 @@ class WaitingListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -36,6 +38,7 @@ class WaitingListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        dd($user);
     }
 }
