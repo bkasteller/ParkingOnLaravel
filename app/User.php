@@ -74,11 +74,24 @@ class User extends Authenticatable
      */
     function leaveRank()
     {
-        User::where('rank', '!=', NULL)
+        User::whereNotNull('rank')
             ->where('rank', '>', $this->rank)
             ->decrement('rank', 1);
 
         $this->rank = NULL;
+        $this->save();
+    }
+
+    /*
+     * Ajoute un utilisateur au rang passé en paramètre
+     */
+    function updateRank($rank)
+    {
+        User::whereNotNull('rank')
+            ->where('rank', '>=', $rank)
+            ->increment('rank', 1);
+
+        $this->rank = $rank;
         $this->save();
     }
 
