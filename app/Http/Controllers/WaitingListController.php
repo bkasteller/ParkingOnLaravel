@@ -14,7 +14,7 @@ class WaitingListController extends Controller
      */
     public function edit()
     {
-        $users = User::whereNotNull('rank')->get();
+        $users = User::whereNotNull('rank')->orderBy('rank', 'asc')->get();
         return view('editWaitingList', compact('users'));
     }
 
@@ -22,12 +22,15 @@ class WaitingListController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-
+        $rank = request('rank');
+        $user->leaveRank();
+        $user->updateRank($rank);
+        return redirect()->back();
     }
 
     /**
@@ -38,7 +41,7 @@ class WaitingListController extends Controller
      */
     public function destroy(User $user)
     {
-        dd($user);
-        return redirect()->route('waitingList.edit');
+        $user->leaveRank();
+        return redirect()->back();
     }
 }

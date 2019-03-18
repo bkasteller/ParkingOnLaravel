@@ -137,7 +137,7 @@ Route::group([
     /*
      * Met à jours l'odre des positions de la liste d'attente.
      */
-    Route::post('/waitingList/update', 'WaitingListController@update')
+    Route::post('/waitingList/{user}/update', 'WaitingListController@update')
         ->name('waitingList.update');
 
     /*
