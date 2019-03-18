@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Search an USER') }}</div>
 
@@ -39,11 +39,11 @@
                             <div class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</div>
 
                             <div class="col-md-6">
-                                <label for="member" class="col-md-4 col-form-label text-md-right">{{ __('Member') }}</label>
-                                <input type="radio" name="type" value="member">
+                                <label for="member" class="col-md-6 col-form-label text-md-right">{{ __('Member') }}</label>
+                                <input type="checkbox" class="adm" name="type" value="member">
 
-                                <label for="admin" class="col-md-4 col-form-label text-md-right">{{ __('Admin') }}</label>
-                                <input type="radio" name="type" value="admin">
+                                <label for="admin" class="col-md-6 col-form-label text-md-right">{{ __('Admin') }}</label>
+                                <input type="checkbox" class="adad" name="type" value="admin">
                             </div>
                         </div>
 
@@ -51,11 +51,11 @@
                             <div class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</div>
 
                             <div class="col-md-6">
-                              <label for="member" class="col-md-4 col-form-label text-md-right">{{ __('Deactivate') }}</label>
-                              <input type="radio" name="activate" value="f">
+                              <label for="member" class="col-md-6 col-form-label text-md-right">{{ __('Deactivate') }}</label>
+                              <input type="checkbox" class="add" name="activate" value="f">
 
-                              <label for="admin" class="col-md-4 col-form-label text-md-right">{{ __('Activate') }}</label>
-                              <input type="radio" name="activate" value="t">
+                              <label for="admin" class="col-md-6 col-form-label text-md-right">{{ __('Activate') }}</label>
+                              <input type="checkbox" class="ada" name="activate" value="t">
                             </div>
                         </div>
 
@@ -70,10 +70,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row justify-content-center" style="margin-top: 30px;">
-        <div class="col-md-8">
+        <div class="col-md-6" style="height:">
             <div class="card">
                 @if ( !empty($users) )
                     @foreach ( $users as $user )
@@ -93,7 +91,7 @@
 
                             <a href="{{ route('user.activate', $user->id) }}">
                                 <button type="button" class="btn btn-outline-danger">
-                                    {{ $user->activate ? 'Deactivate' : 'Activate' }}
+                                    {{ $user->activate ? 'Desactivate' : 'Activate' }}
                                 </button>
                             </a>
                         </div>
@@ -105,4 +103,36 @@
         </div>
     </div>
 </div>
+</div>
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+    $('.adm').change(function() {
+        console.log("adm");
+        if(this.checked) {
+            $('.adad').prop('checked', false); // Unchecks it
+        }
+    })
+        $('.adad').change(function() {
+        if(this.checked) {
+            $('.adm').prop('checked', false); // Unchecks it
+        }
+    })
+
+
+    $('.add').change(function() {
+        if(this.checked) {
+            $('.ada').prop('checked', false); // Unchecks it
+        }
+    })
+
+        $('.ada').change(function() {
+        if(this.checked) {
+            $('.add').prop('checked', false); // Unchecks it
+        }
+    })
+
+    });
+</script>
 @endsection
