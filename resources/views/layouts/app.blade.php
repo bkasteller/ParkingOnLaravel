@@ -105,35 +105,5 @@
         </main>
     </div>
 </body>
-<script type="text/javascript">
 
-$( document ).ready(function() {
-
-    $('.adm').change(function() {
-        console.log("adm");
-        if(this.checked) {
-            $('.adad').prop('checked', false); // Unchecks it
-        }
-    })
-        $('.adad').change(function() {
-        if(this.checked) {
-            $('.adm').prop('checked', false); // Unchecks it
-        }
-    })
-
-
-    $('.add').change(function() {
-        if(this.checked) {
-            $('.ada').prop('checked', false); // Unchecks it
-        }
-    })
-
-        $('.ada').change(function() {
-        if(this.checked) {
-            $('.add').prop('checked', false); // Unchecks it
-        }
-    })
-
-    });
-</script>
 </html>
