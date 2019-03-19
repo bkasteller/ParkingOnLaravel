@@ -3,9 +3,23 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center" style="margin-top: 30px;">
-        <div class="col-md-8">
-            <div class="card">
-                @foreach ($places as $place)
+    <div class="col-md-8">
+        <div class="card" style="height:600px;overflow: auto">
+            
+            <table class="table" >
+                              <th>Place    
+                    <a href="{{ route('place.create') }}" style="float: right;right: 0">
+                    <button type="button" class="btn">
+                        + Add one place
+                    </button>
+                </a></th>
+                
+
+   
+        @foreach ($places as $place)
+         <tr>
+       <td>
+        
                     <p>
                         <B>Place N°{{ $place->id }}</B>
                         <br>
@@ -39,14 +53,19 @@
                             </button>
                         </a>
                     </p>
+               
+            </td>
+            </tr>
                 @endforeach
-                <a href="{{ route('place.create') }}" style="width:0">
-                    <button type="button" class="btn">
-                        + Add one place
-                    </button>
-                </a>
-            </div>
+                
+
+               
+              
+            </table>
         </div>
     </div>
+</div>
+
+
 </div>
 @endsection
