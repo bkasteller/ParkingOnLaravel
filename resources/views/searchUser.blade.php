@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">{{ __('Search an USER') }}</div>
+            <div class="card"  style="overflow: auto;height: 500px">
+                <div class="card-header">{{ __('Search') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.search') }}">
@@ -71,8 +71,10 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="height:">
-            <div class="card">
+        <div class="col-md-6" >
+
+            <div class="card"  style="overflow: auto;height: 500px">
+                 <div class="card-header">{{ __('User') }}</div>
                 @if ( !empty($users) )
                     @foreach ( $users as $user )
                         <div style="padding: 25px;">

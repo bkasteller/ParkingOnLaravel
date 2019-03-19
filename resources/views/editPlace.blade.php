@@ -4,9 +4,7 @@
 
     <div class="row justify-content-center" style="margin-top: 30px;">
         <div class="col-md-5" >
-            <div class="card-header" >{{ __('Place N°').$place->id }}  
-
-            </div>
+            <div class="card-header" > place N {{ $place->id }}  </div>
 
             <div class="card justify-content-center" style="height: 200px;overflow:auto;text-align: center;">
                 @if ( $place->occupied() )
@@ -41,7 +39,7 @@
                 
                     <li style="border-top:1px solid rgba(0,0,0,.125)">
                         <p>From {{ toDate($booking->created_at) }} to {{ $booking->lastDay() }} ------------------</p>
-                          <p>Assigned to {{ $booking->user->lastName.' '.$booking->user->firstName  }} for {{ $booking->duration ? $booking->duration : '∞' }} days (Booking N°{{ $booking->id }})</p>
+                          <p>Assigned to {{ $booking->user->lastName.' '.$booking->user->firstName  }} for {{ $booking->duration ? $booking->duration : '∞' }} days (Booking N° {{ $booking->id }} )</p>
                     </li>
                   
                 @endforeach

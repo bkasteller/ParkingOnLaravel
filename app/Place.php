@@ -40,9 +40,11 @@ class Place extends Model
      * Récupère le dernier utilisateur de la place, si il existe.
      */
     function user()
-    {
-        return User::where('id', $this->booking()->user_id)
-                      ->first();
+    {   
+        if ( !empty($this->booking()->user_id) )
+                return User::where('id', $this->booking()->user_id)
+                              ->first();
+        return 0;
     }
 
     /*

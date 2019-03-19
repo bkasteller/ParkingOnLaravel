@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'WelcomeController@index')
-    ->name('welcome');
+    ->name('login');
 
 Auth::routes();
 
