@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Home') }}</div>
+                <div class="card-header">{{ __('Home    ') }}</div>
 
                 <div class="card-body">
                          @if (!$user->rank)
@@ -20,19 +20,21 @@
                         </form>
                         @endif
 
-                        <button type="button" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('cancel').submit();">
+                        <button type="button" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('cancel').submit();" style="display:inline-block;">
                             Cancel the request
                         </button>
+
+                          @if ($user->rank)
+
+                         <p style="display:inline-block;margin-left: 10px">waiting Placement: {{ $user->rank }}</p>                      
+                         @endif
 
                         <form id="cancel" action="{{ route('booking.cancel') }}" method="POST" style="display:none;" >
                             @csrf
                             <input type="hidden" name="user" value="{{ $user->id }}">
                         </form>
 
-                        @if ($user->rank)
-
-                         <p>waiting Placement: {{ $user->rank }}</p>                      
-                         @endif
+                      
 
                    
                         </div>
