@@ -8,65 +8,27 @@
                 <div class="card-header">{{ __('Search') }}</div>
 
                 <div class="card-body">
+
+                            
+
                     <form method="POST" action="{{ route('user.search') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="lastName" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="last-name" type="text" class="form-control" name="lastName" value="{{ empty($get_back) ? '' : $get_back['lastName'] }}" maxlength="255">
+                  <div class="col-md-12" style="margin-bottom:30px">
+                                <input id="searchx" type="text" class="form-control " name="searchx" placeholder="Search" maxlength="255">
                             </div>
+
+                                   <div class="col-sm-12">
+                          <div class="form-group">
+                              <select class="selectpicker form-control" id="selectBox" >
+                                  <option value="all"  selected >All</option>
+                                  <option value="member" >member</option>
+                                <option value="admin"  >admin</option>
+         
+                              </select>
+                          </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="firstName" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="first-name" type="texte" class="form-control" name="firstName" value="{{ empty($get_back) ? '' : $get_back['firstName'] }}" maxlength="255">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="texte" class="form-control" name="email" value="{{ empty($get_back) ? '' : $get_back['email'] }}" maxlength="255">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</div>
-
-                            <div class="col-md-6">
-                                <label for="member" class="col-md-6 col-form-label text-md-right">{{ __('Member') }}</label>
-                                <input type="checkbox" class="adm" name="type" value="member">
-
-                                <label for="admin" class="col-md-6 col-form-label text-md-right">{{ __('Admin') }}</label>
-                                <input type="checkbox" class="adad" name="type" value="admin">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</div>
-
-                            <div class="col-md-6">
-                              <label for="member" class="col-md-6 col-form-label text-md-right">{{ __('Deactivate') }}</label>
-                              <input type="checkbox" class="add" name="activate" value="f">
-
-                              <label for="admin" class="col-md-6 col-form-label text-md-right">{{ __('Activate') }}</label>
-                              <input type="checkbox" class="ada" name="activate" value="t">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Search') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -74,16 +36,18 @@
         <div class="col-md-6" >
 
             <div class="card"  style="overflow: auto;height: 500px">
-                 <div class="card-header">{{ __('User') }}</div>
+                 <div class="card-header ">{{ __('User') }}</div>
                 @if ( !empty($users) )
                     @foreach ( $users as $user )
-                        <div style="padding: 25px;">
+                        <div class="searchblock {{ $user->type }} " style="padding: 25px;">
                             Last Name : {{ $user->lastName }}
                             <br>
                             First Name : {{ $user->firstName }}
                             <br>
                             Email : {{ $user->email }}
                             <br>
+                             Type : {{ $user->type }}
+                             <br>
 
                             <a href="{{ route('user.edit', $user) }}">
                                 <button type="button" class="btn btn-outline-success">
@@ -135,6 +99,73 @@ $( document ).ready(function() {
         }
     })
 
+
+
+      $("#selectBox").on("change", function() {
+        var selectBox = document.getElementById("selectBox");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+       categ(selectedValue);
+
+
+
+       function categ(categ) {
+    
+        console.log("searching process...");
+        var tr, td, i, txtValue;
+        tr = $(".searchblock");
+            if ( categ != "all" ) {
+        for (i = 0; i < tr.length; i++) {
+      
+               td = tr[i];
+               txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(categ) > -1) {
+                $(td).css( "display", "unset" );
+                 $(td).removeClass("categx");
+            } else {
+                $(td).css( "display", "none" );
+                $(td).addClass("categx");
+            }
+          }
+      
+        } else{
+            $(".searchblock").show();
+ $(".searchblock").removeClass("categx");
+            }
+       }
+
+
+    })
+  
+
+    $("#searchx").on("keyup", function() {
+         //$('#selectBox option').removeAttr('selected').filter('[value=all]').attr('selected', true)
+        console.log("searching process...");
+    var tr, td, i, txtValue;
+  var searchVal = $(this).val().toLowerCase();
+    tr = $(".searchblock");
+        if ( searchVal != '' ) {
+    for (i = 0; i < tr.length; i++) {
+  
+           td = tr[i];
+           txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+        if (txtValue.indexOf(searchVal) > -1) {
+            if ( !$(td).hasClass("categx") ) {
+            $(td).css( "display", "unset" );
+            }
+        } else {
+            $(td).css( "display", "none" );
+        }
+      }
+  
+    } else{
+        $(".searchblock:not(.categx)").show();
+        }
+    })
+  
+  
+  
+ 
+  
     });
 </script>
 @endsection
